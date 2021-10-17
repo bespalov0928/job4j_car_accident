@@ -1,0 +1,1 @@
+[![Build Status](https://app.travis-ci.com/bespalov0928/job4j_car_accident.svg?branch=master)](https://app.travis-ci.com/bespalov0928/job4j_car_accident)
