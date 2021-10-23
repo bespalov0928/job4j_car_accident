@@ -1,5 +1,8 @@
 package ru.job4j.job4j_car_accident;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class StartUI {
     private Store store;
     private ConsoleInput consoleInput;
@@ -17,4 +20,5 @@ public class StartUI {
         for (String value : store.getAll()) {
             System.out.println(value);
         }
-    }}
+    }
+}

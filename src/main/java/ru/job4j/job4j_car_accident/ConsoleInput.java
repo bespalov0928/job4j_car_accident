@@ -1,7 +1,10 @@
 package ru.job4j.job4j_car_accident;
 
+import org.springframework.stereotype.Component;
+
 import java.util.Scanner;
 
+@Component
 public class ConsoleInput {
     private Scanner scanner = new Scanner(System.in);
 
