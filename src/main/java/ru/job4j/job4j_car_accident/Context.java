@@ -2,7 +2,6 @@ package ru.job4j.job4j_car_accident;
 
 import java.lang.reflect.Constructor;
 import java.util.*;
-import java.util.function.Consumer;
 
 public class Context {
     private Map<String, Object> els = new HashMap<String, Object>();
@@ -18,11 +17,6 @@ public class Context {
             if (!els.containsKey(arg.getCanonicalName())) {
                 throw new IllegalStateException("Object doesn't found in context : " + arg.getCanonicalName());
             }
-
-//            if (els.containsKey(arg.getCanonicalName())) {
-//                continue;
-////                throw new IllegalStateException("Object doesn't found in context : " + arg.getCanonicalName());
-//            }
             args.add(els.get(arg.getCanonicalName()));
         }
 
