@@ -1,9 +1,9 @@
-package ru.job4j.job4j_car_accident.di;
+package ru.job4j.accident.di;
 
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-import ru.job4j.job4j_car_accident.ConsoleInput;
-import ru.job4j.job4j_car_accident.StartUI;
-import ru.job4j.job4j_car_accident.Store;
+import ru.job4j.accident.ConsoleInput;
+import ru.job4j.accident.StartUI;
+import ru.job4j.accident.Store;
 
 public class SpringDI {
     public static void main(String[] args) {

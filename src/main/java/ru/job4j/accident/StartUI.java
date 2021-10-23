@@ -1,4 +1,4 @@
-package ru.job4j.job4j_car_accident;
+package ru.job4j.accident;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;

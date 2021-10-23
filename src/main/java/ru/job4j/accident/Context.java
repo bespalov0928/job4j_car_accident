@@ -1,4 +1,4 @@
-package ru.job4j.job4j_car_accident;
+package ru.job4j.accident;
 
 import java.lang.reflect.Constructor;
 import java.util.*;
