@@ -3,18 +3,24 @@ package ru.job4j.accident.repository;
 import org.springframework.stereotype.Repository;
 import ru.job4j.accident.model.Accident;
 
-import java.util.HashMap;
-import java.util.Set;
+import java.util.*;
 
 @Repository
 public class AccidentMem {
-    private HashMap<Integer, Accident> accidents = new HashMap<>();
+    private Map<Integer, Accident> accidents = new HashMap<>();
 
-    public void add(Accident accident) {
-        accidents.put(accidents.size()+1, accident);
+    public AccidentMem(ArrayList<Accident> listAccidents) {
+        for (Accident acc : listAccidents) {
+            if (!accidents.containsValue(acc)) {
+                accidents.put(acc.getId(), acc);
+            }
+        }
     }
 
-    public HashMap<Integer, Accident> findAllAccidents(){
-        return accidents;
+    public ArrayList<Accident> findAllAccidents() {
+        Collection<Accident> colRsl = accidents.values();
+        ArrayList rsl = new ArrayList(colRsl);
+        return rsl;
     }
+
 }
