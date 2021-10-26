@@ -5,14 +5,15 @@ import ru.job4j.accident.model.Accident;
 import ru.job4j.accident.repository.AccidentMem;
 
 import java.util.Random;
+import java.util.concurrent.atomic.AtomicInteger;
 
 @Service
 public class AccidentService {
-    final Random random = new Random();
+    private AtomicInteger counter = new AtomicInteger(0);
 
     public Accident createAccident(String name, String descr, String addres) {
         Accident acc = new Accident(name, descr, addres);
-        acc.setId(random.nextInt(100));
+        acc.setId(counter.incrementAndGet());
         return acc;
     }
 

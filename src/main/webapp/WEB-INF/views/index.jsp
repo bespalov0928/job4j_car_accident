@@ -23,6 +23,13 @@
 <body>
 
 <div class="card-body">
+    <a href="<c:url value='/create'/>">Добавить инцидент</a>
+    <br>
+    <a href="<c:url value='/edit'/>">Редактировать инцидент</a>
+
+    <input type="hidden" name="id" value="99"/>
+
+
     <table class="table">
         <thead>
         <tr>
@@ -42,6 +49,9 @@
                 </td>
                 <td>
                     <c:out value="${acc.address}"/>
+                </td>
+                <td>
+                    <c:out value="${acc.id}"/>
                 </td>
             </tr>
         </c:forEach>

@@ -16,6 +16,18 @@ public class Accident {
         this.id = id;
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setText(String text) {
+        this.text = text;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
     public int getId() {
         return id;
     }
