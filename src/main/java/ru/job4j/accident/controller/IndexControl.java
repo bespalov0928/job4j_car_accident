@@ -13,11 +13,12 @@ import java.util.ArrayList;
 @Controller
 public class IndexControl {
     private AccidentService accidentServic = new AccidentService();
+    private final AccidentMem accidentMem = new AccidentMem();
 
     @GetMapping("/")
     public String index(Model model) {
         model.addAttribute("user", "Petr Arsentev");
-        AccidentMem accidentMem = new AccidentMem();
+
 
         ArrayList<Accident> accidents = accidentMem.findAllAccidents();
         model.addAttribute("accidents", accidents);

@@ -11,15 +11,17 @@ import java.util.*;
 public class AccidentMem {
 
     private Map<Integer, Accident> accidents = new HashMap<>();
-
+    private final AccidentService accidentService = new AccidentService();
     public AccidentMem() {
-        AccidentService accidentService = new AccidentService();
-        Accident acc1 = accidentService.createAccident("acc1", "descr1", "addres1");
-        Accident acc2 = accidentService.createAccident("acc2", "descr2", "addres2");
-        Accident acc3 = accidentService.createAccident("acc3", "descr3", "addres3");
-        accidents.put(acc1.getId(), acc1);
-        accidents.put(acc2.getId(), acc2);
-        accidents.put(acc3.getId(), acc3);
+
+        if (accidents.size() == 0) {
+            Accident acc1 = accidentService.createAccident("acc1", "descr1", "addres1");
+            Accident acc2 = accidentService.createAccident("acc2", "descr2", "addres2");
+            Accident acc3 = accidentService.createAccident("acc3", "descr3", "addres3");
+            accidents.put(acc1.getId(), acc1);
+            accidents.put(acc2.getId(), acc2);
+            accidents.put(acc3.getId(), acc3);
+        }
     }
 
     public ArrayList<Accident> findAllAccidents() {
@@ -29,8 +31,9 @@ public class AccidentMem {
     }
 
     public void add(Accident accident) {
-        if (!accidents.containsValue(accident)) {
-            accidents.put(accident.getId(), accident);
+        Accident accNew = accidentService.createAccident(accident.getName(), accident.getText(), accident.getAddress());
+        if (!accidents.containsValue(accNew)) {
+            accidents.put(accNew.getId(), accNew);
         }
     }
 
