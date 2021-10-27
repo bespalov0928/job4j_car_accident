@@ -17,4 +17,10 @@ public class AccidentService {
         return acc;
     }
 
+    public Accident generateId(Accident accident) {
+        int rsl = counter.incrementAndGet();
+        accident.setId(rsl);
+        return accident;
+    }
+
 }

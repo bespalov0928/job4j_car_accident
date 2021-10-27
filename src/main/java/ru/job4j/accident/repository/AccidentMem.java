@@ -31,18 +31,12 @@ public class AccidentMem {
     }
 
     public void add(Accident accident) {
-        Accident accNew = accidentService.createAccident(accident.getName(), accident.getText(), accident.getAddress());
-        if (!accidents.containsValue(accNew)) {
-            accidents.put(accNew.getId(), accNew);
+        if (!accidents.containsValue(accident)) {
+            accidents.put(accident.getId(), accident);
         }
     }
 
     public void edit(Integer id, Accident accident) {
-        if (accidents.containsKey(id)) {
-            Accident accOld = accidents.get(accident.getId());
-            accOld.setName(accident.getName());
-            accOld.setText(accident.getText());
-            accOld.setAddress(accident.getAddress());
-        }
     }
+
 }

@@ -10,13 +10,11 @@ import ru.job4j.accident.model.Accident;
 import ru.job4j.accident.repository.AccidentMem;
 import ru.job4j.accident.service.AccidentService;
 
-import javax.servlet.http.HttpServletRequest;
-import java.util.Random;
+
 import java.util.concurrent.atomic.AtomicInteger;
 
 @Controller
 public class AccidentControl {
-    private AtomicInteger counter;
     private final AccidentMem accidents;
     private AccidentService accidentService = new AccidentService();
 
@@ -31,6 +29,7 @@ public class AccidentControl {
 
     @PostMapping("/save")
     public String save(@ModelAttribute Accident accident){
+        accidentService.generateId(accident);
         accidents.add(accident);
         return "redirect:/";
     }

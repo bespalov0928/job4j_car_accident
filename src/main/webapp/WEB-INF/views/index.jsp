@@ -42,6 +42,9 @@
         <c:forEach items="${accidents}" var="acc">
             <tr>
                 <td>
+                    <span>
+                       <a href="<c:url value='/edit?id=${acc.id}'/>">Редактировать</a>
+                    </span>
                     <c:out value="${acc.name}"/>
                 </td>
                 <td>
