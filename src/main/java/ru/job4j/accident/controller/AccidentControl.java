@@ -23,27 +23,25 @@ public class AccidentControl {
     }
 
     @GetMapping("/create")
-    public String create(){
+    public String create() {
         return "accident/create";
     }
 
     @PostMapping("/save")
-    public String save(@ModelAttribute Accident accident){
-        accidentService.generateId(accident);
+    public String save(@ModelAttribute Accident accident) {
+        if (accident.getId() == 0) {
+            accidentService.generateId(accident);
+        }
+
         accidents.add(accident);
         return "redirect:/";
     }
 
 
     @GetMapping("/edit")
-    public String edit(){
+    public String edit(@RequestParam("id") int id, Model model) {
+        model.addAttribute("accident", accidents.findById(id));
         return "accident/edit";
-    }
-
-    @PostMapping("/edit")
-    public String edit(@ModelAttribute Accident accident){
-        accidents.edit(Integer.valueOf(accident.getId()), accident);
-        return "redirect:/";
     }
 
 }

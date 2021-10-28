@@ -36,7 +36,9 @@ public class AccidentMem {
         }
     }
 
-    public void edit(Integer id, Accident accident) {
+    public Accident findById(int id){
+        Accident acc = accidents.get(id);
+        return acc;
     }
 
 }
