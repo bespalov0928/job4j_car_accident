@@ -3,6 +3,7 @@ package ru.job4j.accident.repository;
 import org.springframework.stereotype.Repository;
 import ru.job4j.accident.controller.IndexControl;
 import ru.job4j.accident.model.Accident;
+import ru.job4j.accident.model.AccidentType;
 import ru.job4j.accident.service.AccidentService;
 
 import java.util.*;
@@ -12,6 +13,8 @@ public class AccidentMem {
 
     private Map<Integer, Accident> accidents = new HashMap<>();
     private final AccidentService accidentService = new AccidentService();
+    private final Map<Integer, AccidentType> types = new HashMap<>();
+
     public AccidentMem() {
 
         if (accidents.size() == 0) {
@@ -36,9 +39,16 @@ public class AccidentMem {
         }
     }
 
-    public Accident findById(int id){
+    public Accident findById(int id) {
         Accident acc = accidents.get(id);
         return acc;
+    }
+
+    public void addType(AccidentType accidentType) {
+        if (!types.containsValue(accidentType.getId())) {
+            types.put(accidentType.getId(), accidentType);
+        }
+
     }
 
 }
