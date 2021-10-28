@@ -18,9 +18,12 @@ public class AccidentMem {
     public AccidentMem() {
 
         if (accidents.size() == 0) {
-            Accident acc1 = accidentService.createAccident("acc1", "descr1", "addres1");
-            Accident acc2 = accidentService.createAccident("acc2", "descr2", "addres2");
-            Accident acc3 = accidentService.createAccident("acc3", "descr3", "addres3");
+            AccidentType type = new AccidentType();
+            type.setId(1);
+            type.setName("Две машины");
+            Accident acc1 = accidentService.createAccident("acc1", "descr1", "addres1", type);
+            Accident acc2 = accidentService.createAccident("acc2", "descr2", "addres2", type);
+            Accident acc3 = accidentService.createAccident("acc3", "descr3", "addres3", type);
             accidents.put(acc1.getId(), acc1);
             accidents.put(acc2.getId(), acc2);
             accidents.put(acc3.getId(), acc3);

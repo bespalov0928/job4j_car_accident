@@ -7,10 +7,11 @@ public class Accident {
     private String address;
     private AccidentType type;
 
-    public Accident(String name, String text, String address) {
+    public Accident(String name, String text, String address, AccidentType type) {
         this.name = name;
         this.text = text;
         this.address = address;
+        this.type = type;
     }
 
     public void setId(int id) {
@@ -43,5 +44,13 @@ public class Accident {
 
     public String getAddress() {
         return address;
+    }
+
+    public AccidentType getType() {
+        return type;
+    }
+
+    public void setType(AccidentType type) {
+        this.type = type;
     }
 }
