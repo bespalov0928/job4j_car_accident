@@ -16,13 +16,14 @@ public class AccidentService {
     private AccidentService(){
 
     }
-
-    public static AccidentService getInstance(){
-        if (instance == null){
-            instance = new AccidentService();
-        }
-        return instance;
+    public static class SingletonHolder {
+        public static final AccidentService HOLDER_INSTANCE = new AccidentService();
     }
+
+    public static AccidentService getInstance() {
+        return AccidentService.SingletonHolder.HOLDER_INSTANCE;
+    }
+
 
     public Accident createAccident(String name, String descr, String addres, AccidentType type) {
         Accident acc = new Accident(name, descr, addres, type, "");

@@ -45,14 +45,22 @@ public class AccidentMem {
         }
     }
 
-    public static AccidentMem getInstance() {
-
-        if (instance == null) {
-            instance = new AccidentMem();
-        }
-        return instance;
-
+    public static class SingletonHolder {
+        public static final AccidentMem HOLDER_INSTANCE = new AccidentMem();
     }
+
+    public static AccidentMem getInstance() {
+        return SingletonHolder.HOLDER_INSTANCE;
+    }
+
+//    public static AccidentMem getInstance() {
+//
+//        if (instance == null) {
+//            instance = new AccidentMem();
+//        }
+//        return instance;
+//
+//    }
 
     public ArrayList<Accident> findAllAccidents() {
         Collection<Accident> colRsl = accidents.values();
