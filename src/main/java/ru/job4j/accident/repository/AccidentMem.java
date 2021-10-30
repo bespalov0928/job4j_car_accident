@@ -4,8 +4,10 @@ import org.springframework.stereotype.Repository;
 import ru.job4j.accident.controller.IndexControl;
 import ru.job4j.accident.model.Accident;
 import ru.job4j.accident.model.AccidentType;
+import ru.job4j.accident.model.Rule;
 import ru.job4j.accident.service.AccidentService;
 
+import javax.management.relation.Role;
 import java.util.*;
 
 @Repository
@@ -15,6 +17,7 @@ public class AccidentMem {
     private final AccidentService accidentService = AccidentService.getInstance();
     private Map<Integer, Accident> accidents = new HashMap<>();
     private Map<Integer, AccidentType> types = new HashMap<>();
+    private List<Rule> rules = new ArrayList<>();
 
     private AccidentMem() {
 
@@ -33,6 +36,12 @@ public class AccidentMem {
             accidents.put(acc1.getId(), acc1);
             accidents.put(acc2.getId(), acc2);
             accidents.put(acc3.getId(), acc3);
+
+            rules.add(Rule.of(1, "Статья. 1"));
+            rules.add(Rule.of(2, "Статья. 2"));
+            rules.add(Rule.of(3, "Статья. 3"));
+
+
         }
     }
 
@@ -51,16 +60,22 @@ public class AccidentMem {
         return rsl;
     }
 
-    public void add(Accident accident) {
+    public void add(Accident accident, String[] rIds) {
         if (accident.getId() == 0) {
             accidentService.generateId(accident);
         } else {
             accident.setId(Integer.valueOf(accident.getIdString()));
         }
         accident.setType(findByIdType(accident.getType().getId()));
+        for (String r:rIds) {
+            Rule rule = rules.get(Integer.valueOf(r)-1);
+            accident.addRule(rule);
+        }
+
         if (!accidents.containsValue(accident)) {
             accidents.put(accident.getId(), accident);
         }
+
     }
 
     public Accident findById(int id) {
@@ -83,6 +98,15 @@ public class AccidentMem {
     public AccidentType findByIdType(int id) {
         AccidentType acc = types.get(id);
         return acc;
+    }
+
+    public List<Rule> findAllRule() {
+        return rules;
+    }
+
+    public Rule findByIdRule(Integer id) {
+        Rule rsl = rules.get(id);
+        return rsl;
     }
 
 }

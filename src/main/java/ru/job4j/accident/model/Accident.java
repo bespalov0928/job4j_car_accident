@@ -1,5 +1,8 @@
 package ru.job4j.accident.model;
 
+import java.util.HashSet;
+import java.util.Set;
+
 public class Accident {
     private int id;
     private String name;
@@ -7,6 +10,7 @@ public class Accident {
     private String address;
     private AccidentType type;
     private String idString;
+    private Set<Rule> rules;
 
     public Accident(String name, String text, String address, AccidentType type, String idString) {
         this.name = name;
@@ -62,5 +66,16 @@ public class Accident {
 
     public void setIdString(String idString) {
         this.idString = idString;
+    }
+
+    public Set<Rule> getRules() {
+        return rules;
+    }
+
+    public void addRule(Rule rule) {
+        if (this.rules == null) {
+            this.rules = new HashSet<Rule>();
+        }
+        this.rules.add(rule);
     }
 }
