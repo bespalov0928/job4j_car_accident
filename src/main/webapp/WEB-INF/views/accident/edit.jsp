@@ -22,6 +22,25 @@
             <td><input type="text" name="idString" value="${accident.id}"></td>
         </tr>
         <tr>
+            <td>Тип:</td>
+            <td>
+                <select name="type.id">
+                    <c:forEach var="type" items="${types}">
+                        <c:set var="x" scope="session" value="${type.id}" />
+                        <c:set var="y" scope="session" value="${accident.type.id}" />
+                        <c:if test="${x eq y}">
+                            <option selected value="${type.id}">${type.name}</option>
+                        </c:if>
+                        <c:if test="${x ne y}">
+                            <option value="${type.id}">${type.name}</option>
+                        </c:if>
+
+                    </c:forEach>
+                </select>
+            </td>
+        </tr>
+
+        <tr>
             <td colspan='2'><input name="submit" type="submit" value="Сохранить" /></td>
         </tr>
     </table>

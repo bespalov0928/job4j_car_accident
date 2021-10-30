@@ -27,10 +27,7 @@ public class AccidentControl {
 
     @GetMapping("/create")
     public String create(Model model) {
-        List<AccidentType> types = new ArrayList<>();
-        types.add(AccidentType.of(1, "Две машины"));
-        types.add(AccidentType.of(2, "Машина и человек"));
-        types.add(AccidentType.of(3, "Машина и велосипед"));
+        List<AccidentType> types = accidents.findAllAccidentType();
         model.addAttribute("types", types);
         return "accident/create";
     }
@@ -49,6 +46,8 @@ public class AccidentControl {
 
     @GetMapping("/edit")
     public String edit(@RequestParam("id") int id, Model model) {
+        List<AccidentType> types = accidents.findAllAccidentType();
+        model.addAttribute("types", types);
         model.addAttribute("accident", accidents.findById(id));
         return "accident/edit";
     }

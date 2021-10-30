@@ -36,6 +36,7 @@
             <th scope="col">Название</th>
             <th scope="col">Описание</th>
             <th scope="col">Адрес</th>
+            <th scope="col">Тип события</th>
         </tr>
         </thead>
         <tbody>
@@ -52,6 +53,9 @@
                 </td>
                 <td>
                     <c:out value="${acc.address}"/>
+                </td>
+                <td>
+                    <c:out value="${acc.type.name}"/>
                 </td>
                 <td>
                     <c:out value="${acc.id}"/>
