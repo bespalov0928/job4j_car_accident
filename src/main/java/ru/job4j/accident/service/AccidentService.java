@@ -13,7 +13,7 @@ public class AccidentService {
     private AtomicInteger counter = new AtomicInteger(0);
 
     public Accident createAccident(String name, String descr, String addres, AccidentType type) {
-        Accident acc = new Accident(name, descr, addres, type);
+        Accident acc = new Accident(name, descr, addres, type, "");
         acc.setId(counter.incrementAndGet());
         return acc;
     }

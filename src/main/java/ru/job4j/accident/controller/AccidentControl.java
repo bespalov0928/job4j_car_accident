@@ -39,8 +39,9 @@ public class AccidentControl {
     public String save(@ModelAttribute Accident accident) {
         if (accident.getId() == 0) {
             accidentService.generateId(accident);
+        } else {
+            accident.setId(Integer.valueOf(accident.getIdString()));
         }
-
         accidents.add(accident);
         return "redirect:/";
     }
