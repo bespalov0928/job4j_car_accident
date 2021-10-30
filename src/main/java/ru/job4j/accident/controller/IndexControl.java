@@ -13,10 +13,10 @@ import java.util.ArrayList;
 @Controller
 public class IndexControl {
 
-    private AccidentService accidentServic = new AccidentService();
-    private final AccidentMem accidentMem = new AccidentMem();
+    private AccidentService accidentServic = AccidentService.getInstance();
+    private final AccidentMem accidentMem = AccidentMem.getInstance();
 
-    public IndexControl(AccidentService accidentServic) {
+    public IndexControl() {
         this.accidentServic = accidentServic;
     }
 

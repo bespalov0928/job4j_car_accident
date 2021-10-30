@@ -18,12 +18,8 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 @Controller
 public class AccidentControl {
-    private final AccidentMem accidents;
-    private AccidentService accidentService = new AccidentService();
-
-    public AccidentControl(AccidentMem accidents) {
-        this.accidents = accidents;
-    }
+    private final AccidentMem accidents = AccidentMem.getInstance();
+    private AccidentService accidentService = AccidentService.getInstance();
 
     @GetMapping("/create")
     public String create(Model model) {
@@ -34,15 +30,9 @@ public class AccidentControl {
 
     @PostMapping("/save")
     public String save(@ModelAttribute Accident accident) {
-        if (accident.getId() == 0) {
-            accidentService.generateId(accident);
-        } else {
-            accident.setId(Integer.valueOf(accident.getIdString()));
-        }
         accidents.add(accident);
         return "redirect:/";
     }
-
 
     @GetMapping("/edit")
     public String edit(@RequestParam("id") int id, Model model) {

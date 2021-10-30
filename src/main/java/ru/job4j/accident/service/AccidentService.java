@@ -11,6 +11,18 @@ import java.util.concurrent.atomic.AtomicInteger;
 @Service
 public class AccidentService {
     private AtomicInteger counter = new AtomicInteger(0);
+    private static AccidentService instance;
+
+    private AccidentService(){
+
+    }
+
+    public static AccidentService getInstance(){
+        if (instance == null){
+            instance = new AccidentService();
+        }
+        return instance;
+    }
 
     public Accident createAccident(String name, String descr, String addres, AccidentType type) {
         Accident acc = new Accident(name, descr, addres, type, "");

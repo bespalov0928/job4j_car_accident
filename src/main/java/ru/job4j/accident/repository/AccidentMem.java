@@ -11,11 +11,12 @@ import java.util.*;
 @Repository
 public class AccidentMem {
 
+    private static AccidentMem instance;
+    private final AccidentService accidentService = AccidentService.getInstance();
     private Map<Integer, Accident> accidents = new HashMap<>();
-    private final AccidentService accidentService = new AccidentService();
     private Map<Integer, AccidentType> types = new HashMap<>();
 
-    public AccidentMem() {
+    private AccidentMem() {
 
         if (accidents.size() == 0) {
 
@@ -35,6 +36,15 @@ public class AccidentMem {
         }
     }
 
+    public static AccidentMem getInstance() {
+
+        if (instance == null) {
+            instance = new AccidentMem();
+        }
+        return instance;
+
+    }
+
     public ArrayList<Accident> findAllAccidents() {
         Collection<Accident> colRsl = accidents.values();
         ArrayList rsl = new ArrayList(colRsl);
@@ -42,6 +52,12 @@ public class AccidentMem {
     }
 
     public void add(Accident accident) {
+        if (accident.getId() == 0) {
+            accidentService.generateId(accident);
+        } else {
+            accident.setId(Integer.valueOf(accident.getIdString()));
+        }
+        accident.setType(findByIdType(accident.getType().getId()));
         if (!accidents.containsValue(accident)) {
             accidents.put(accident.getId(), accident);
         }
@@ -64,5 +80,9 @@ public class AccidentMem {
         return rsl;
     }
 
+    public AccidentType findByIdType(int id) {
+        AccidentType acc = types.get(id);
+        return acc;
+    }
 
 }
