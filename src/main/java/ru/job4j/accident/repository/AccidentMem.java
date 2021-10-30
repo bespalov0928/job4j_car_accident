@@ -53,15 +53,6 @@ public class AccidentMem {
         return SingletonHolder.HOLDER_INSTANCE;
     }
 
-//    public static AccidentMem getInstance() {
-//
-//        if (instance == null) {
-//            instance = new AccidentMem();
-//        }
-//        return instance;
-//
-//    }
-
     public ArrayList<Accident> findAllAccidents() {
         Collection<Accident> colRsl = accidents.values();
         ArrayList rsl = new ArrayList(colRsl);
