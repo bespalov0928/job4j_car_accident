@@ -25,16 +25,10 @@ public class IndexControl {
         this.accidents = accidents;
     }
 
-
-
     @GetMapping("/")
     public String index(Model model) {
         List<Accident> accidentList = null;
-        try {
-            accidentList = accidents.getAll();
-        }catch (Exception e){
-            e.printStackTrace();
-        }
+        accidentList = accidents.findAllAccidents();
         model.addAttribute("accidents", accidentList);
         return "index";
     }

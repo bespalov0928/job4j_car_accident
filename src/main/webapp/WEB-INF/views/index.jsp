@@ -25,7 +25,7 @@
 <div class="card-body">
     <a href="<c:url value='/create'/>">Добавить инцидент</a>
     <br>
-    <a href="<c:url value='/edit'/>">Редактировать инцидент</a>
+    <%--<a href="<c:url value='/edit'/>">Редактировать инцидент</a>--%>
 
     <input type="hidden" name="id" value="99"/>
 
@@ -43,23 +43,23 @@
         <c:forEach items="${accidents}" var="acc">
             <tr>
                 <td>
-                    <%--<span>--%>
-                       <%--<a href="<c:url value='/edit?id=${acc.id}'/>">Редактировать</a>--%>
-                    <%--</span>--%>
+                    <span>
+                       <a href="<c:url value='/edit?id=${acc.id}'/>">Редактировать</a>
+                    </span>
                     <c:out value="${acc.name}"/>
                 </td>
-                <%--<td>--%>
-                    <%--<c:out value="${acc.text}"/>--%>
-                <%--</td>--%>
-                <%--<td>--%>
-                    <%--<c:out value="${acc.address}"/>--%>
-                <%--</td>--%>
-                <%--<td>--%>
-                    <%--<c:out value="${acc.type.name}"/>--%>
-                <%--</td>--%>
-                <%--<td>--%>
-                    <%--<c:out value="${acc.id}"/>--%>
-                <%--</td>--%>
+                <td>
+                    <c:out value="${acc.text}"/>
+                </td>
+                <td>
+                    <c:out value="${acc.address}"/>
+                </td>
+                <td>
+                    <c:out value="${acc.type.name}"/>
+                </td>
+                <td>
+                    <c:out value="${acc.id}"/>
+                </td>
             </tr>
         </c:forEach>
         </tbody>
