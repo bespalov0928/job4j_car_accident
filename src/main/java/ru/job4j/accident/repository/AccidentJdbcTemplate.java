@@ -1,5 +1,6 @@
 package ru.job4j.accident.repository;
 
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 import ru.job4j.accident.model.Accident;
@@ -54,6 +55,7 @@ public class AccidentJdbcTemplate {
 
     public Accident findById(int id) {
         Accident rsl;
+        //jdbc.queryForObject("select * from accident where id = 1", new
         rsl = (Accident) jdbc.queryForObject("select accident.id as id, " +
                         "accident.name as name, " +
                         "accident.text as text, " +
@@ -97,14 +99,11 @@ public class AccidentJdbcTemplate {
     }
 
     public AccidentType findByIdType(int id) {
-        return jdbc.queryForObject("select id, name from accidentType where id = ?",
-                (resultSet, rowNum) -> {
-                    AccidentType type = new AccidentType();
-                    type.setId(resultSet.getInt("id"));
-                    type.setName(resultSet.getString("name"));
-                    return type;
-                }, id
+        String sql = "select * from accidentType where id = ?";
+        return (AccidentType) jdbc.queryForObject(sql, new Object[]{id}, (rs, rowNum) ->
+                AccidentType.of(rs.getInt("id"), rs.getString("name"))
         );
+
     }
 
     public List<Rule> findAllRule() {
@@ -121,14 +120,10 @@ public class AccidentJdbcTemplate {
     }
 
     public Rule findByIdRule(Integer id) {
-        return jdbc.queryForObject("select id, name from accidentType where id = ?",
-                (resultSet, rowNum) -> {
-                    Rule rule = new Rule();
-                    rule.setId(resultSet.getInt("id"));
-                    rule.setName(resultSet.getString("name"));
-                    return rule;
-                }, id
-        );
+        String sql = "select * from rule where id = ?";
+        return (Rule) jdbc.queryForObject(sql, new Object[]{id}, (rs, rowNum) ->
+                Rule.of(rs.getInt("id"), rs.getString("name")));
     }
 
 }
+

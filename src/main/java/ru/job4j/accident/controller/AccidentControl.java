@@ -12,7 +12,6 @@ import ru.job4j.accident.model.Rule;
 import ru.job4j.accident.repository.AccidentJdbcTemplate;
 import ru.job4j.accident.service.AccidentService;
 
-
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
