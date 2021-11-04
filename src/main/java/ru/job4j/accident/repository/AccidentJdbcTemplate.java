@@ -55,7 +55,6 @@ public class AccidentJdbcTemplate {
 
     public Accident findById(int id) {
         Accident rsl;
-        //jdbc.queryForObject("select * from accident where id = 1", new
         rsl = (Accident) jdbc.queryForObject("select accident.id as id, " +
                         "accident.name as name, " +
                         "accident.text as text, " +
