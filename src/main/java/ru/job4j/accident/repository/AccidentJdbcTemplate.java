@@ -76,7 +76,7 @@ public class AccidentJdbcTemplate {
                     newAccident.setText(resultSet.getString("text"));
                     newAccident.setAddress(resultSet.getString("address"));
                     newAccident.setType(type);
-                    newAccident.setIdString(resultSet.getString("id"));
+                    //newAccident.setIdString(resultSet.getString("id"));
                     return newAccident;
                 }
         );

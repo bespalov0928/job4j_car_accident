@@ -14,14 +14,9 @@ import java.util.List;
 @Controller
 public class IndexControl {
 
-    private AccidentService accidentServic = AccidentService.getInstance();
-    private final AccidentMem accidentMem = AccidentMem.getInstance();
-    private final AccidentJdbcTemplate accidents;
+    private final AccidentMem accidents;
 
-
-
-    public IndexControl(AccidentJdbcTemplate accidents) {
-        this.accidentServic = accidentServic;
+    public IndexControl(AccidentMem accidents) {
         this.accidents = accidents;
     }
 

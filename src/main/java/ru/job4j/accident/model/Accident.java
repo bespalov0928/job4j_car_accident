@@ -9,18 +9,18 @@ public class Accident {
     private String text;
     private String address;
     private AccidentType type;
-    private String idString;
     private Set<Rule> rules;
 
     public Accident() {
     }
 
-    public Accident(String name, String text, String address, AccidentType type, String idString) {
-        this.name = name;
-        this.text = text;
-        this.address = address;
-        this.type = type;
-        this.idString = idString;
+    public static Accident of(String name, String text, String address, AccidentType type) {
+        Accident acc  = new Accident();
+        acc.name = name;
+        acc.text = text;
+        acc.address = address;
+        acc.type = type;
+        return acc;
     }
 
     public void setId(int id) {
@@ -61,14 +61,6 @@ public class Accident {
 
     public void setType(AccidentType type) {
         this.type = type;
-    }
-
-    public String getIdString() {
-        return idString;
-    }
-
-    public void setIdString(String idString) {
-        this.idString = idString;
     }
 
     public Set<Rule> getRules() {
