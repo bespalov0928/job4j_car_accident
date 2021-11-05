@@ -4,6 +4,7 @@ import org.springframework.stereotype.Service;
 import ru.job4j.accident.model.Accident;
 import ru.job4j.accident.model.AccidentType;
 import ru.job4j.accident.model.Rule;
+import ru.job4j.accident.repository.AccidentJdbcTemplate;
 import ru.job4j.accident.repository.AccidentMem;
 
 import java.util.*;
@@ -18,9 +19,6 @@ public class AccidentService {
         this.accidents = accidents;
         List<Accident> listAcc = accidents.findAllAccidents();
         if (listAcc.size() == 0) {
-            List<AccidentType> types = accidents.findAllAccidentType();
-            List<Rule> rules = accidents.findAllRule();
-
             AccidentType type1 = accidents.findByIdType(1);
             AccidentType type2 = accidents.findByIdType(2);
             AccidentType type3 = accidents.findByIdType(3);
@@ -32,9 +30,13 @@ public class AccidentService {
             acc2.setId(counter.incrementAndGet());
             acc3.setId(counter.incrementAndGet());
 
-            accidents.add(acc1, new String[]{"1"});
-            accidents.add(acc2, new String[]{"2"});
-            accidents.add(acc3, new String[]{"3"});
+            acc1.addRule(accidents.findByIdRule(Integer.valueOf(1)));
+            acc2.addRule(accidents.findByIdRule(Integer.valueOf(2)));
+            acc3.addRule(accidents.findByIdRule(Integer.valueOf(3)));
+
+            accidents.add(acc1);
+            accidents.add(acc2);
+            accidents.add(acc3);
         }
     }
 
@@ -51,7 +53,13 @@ public class AccidentService {
         }
         AccidentType type = accidents.findByIdType(accident.getType().getId());
         accident.setType(type);
-        accidents.add(accident, rIds);
+
+        for (String r : rIds) {
+            Rule rule = accidents.findByIdRule(Integer.valueOf(r));
+            accident.addRule(rule);
+        }
+
+        accidents.add(accident);
     }
 
     public Accident findById(int id) {

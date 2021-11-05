@@ -13,7 +13,7 @@ public class AccidentMem {
 
     private Map<Integer, Accident> accidents = new HashMap<>();
     private Map<Integer, AccidentType> types = new HashMap<>();
-    private List<Rule> rules = new ArrayList<>();
+    private Map<Integer, Rule> rules = new HashMap<>();
 
     private AccidentMem() {
 
@@ -21,15 +21,13 @@ public class AccidentMem {
             types.put(1, AccidentType.of(1, "Две машины"));
             types.put(2, AccidentType.of(2, "Машина и человек"));
             types.put(3, AccidentType.of(3, "Машина и велосипед"));
-
         }
 
         if (rules.size() == 0) {
-            rules.add(Rule.of(1, "Статья. 1"));
-            rules.add(Rule.of(2, "Статья. 2"));
-            rules.add(Rule.of(3, "Статья. 3"));
+            rules.put(1, Rule.of(1, "Статья. 1"));
+            rules.put(2, Rule.of(2, "Статья. 2"));
+            rules.put(3, Rule.of(3, "Статья. 3"));
         }
-
     }
 
     public ArrayList<Accident> findAllAccidents() {
@@ -38,13 +36,8 @@ public class AccidentMem {
         return rsl;
     }
 
-    public void add(Accident accident, String[] rIds) {
-        for (String r : rIds) {
-            Rule rule = rules.get(Integer.valueOf(r) - 1);
-            accident.addRule(rule);
-        }
-            accidents.put(accident.getId(), accident);
-
+    public void add(Accident accident) {
+        accidents.put(accident.getId(), accident);
     }
 
     public Accident findById(int id) {
@@ -70,7 +63,10 @@ public class AccidentMem {
     }
 
     public List<Rule> findAllRule() {
-        return rules;
+        Collection<Rule> colRsl = rules.values();
+        ArrayList rsl = new ArrayList<Rule>(colRsl);
+        return rsl;
+        //return (List<Rule>) rules.values();
     }
 
     public Rule findByIdRule(Integer id) {
