@@ -66,7 +66,6 @@ public class AccidentMem {
         Collection<Rule> colRsl = rules.values();
         ArrayList rsl = new ArrayList<Rule>(colRsl);
         return rsl;
-        //return (List<Rule>) rules.values();
     }
 
     public Rule findByIdRule(Integer id) {
