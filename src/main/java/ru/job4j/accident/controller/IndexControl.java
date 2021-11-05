@@ -14,16 +14,16 @@ import java.util.List;
 @Controller
 public class IndexControl {
 
-    private final AccidentMem accidents;
+    private final AccidentService accidentService;
 
-    public IndexControl(AccidentMem accidents) {
-        this.accidents = accidents;
+    public IndexControl(AccidentService accidentService) {
+        this.accidentService = accidentService;
     }
 
     @GetMapping("/")
     public String index(Model model) {
         List<Accident> accidentList = null;
-        accidentList = accidents.findAllAccidents();
+        accidentList = accidentService.findAllAccidents();
         model.addAttribute("accidents", accidentList);
         return "index";
     }

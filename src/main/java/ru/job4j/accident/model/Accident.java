@@ -59,6 +59,7 @@ public class Accident {
         return type;
     }
 
+
     public void setType(AccidentType type) {
         this.type = type;
     }

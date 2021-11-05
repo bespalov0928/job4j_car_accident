@@ -11,36 +11,25 @@ import java.util.*;
 @Repository
 public class AccidentMem {
 
-    private final AccidentService accidentService = new AccidentService();
     private Map<Integer, Accident> accidents = new HashMap<>();
     private Map<Integer, AccidentType> types = new HashMap<>();
     private List<Rule> rules = new ArrayList<>();
 
     private AccidentMem() {
 
+        if (types.size() == 0) {
+            types.put(1, AccidentType.of(1, "Две машины"));
+            types.put(2, AccidentType.of(2, "Машина и человек"));
+            types.put(3, AccidentType.of(3, "Машина и велосипед"));
 
-        if (accidents.size() == 0) {
+        }
 
-            AccidentType type1 = AccidentType.of(1, "Две машины");
-            AccidentType type2 = AccidentType.of(2, "Машина и человек");
-            AccidentType type3 = AccidentType.of(3, "Машина и велосипед");
-            types.put(type1.getId(), type1);
-            types.put(type2.getId(), type2);
-            types.put(type3.getId(), type3);
-
-            Accident acc1 = this.accidentService.createAccident("acc1", "descr1", "addres1", type1);
-            Accident acc2 = this.accidentService.createAccident("acc2", "descr2", "addres2", type2);
-            Accident acc3 = this.accidentService.createAccident("acc3", "descr3", "addres3", type3);
-            accidents.put(acc1.getId(), acc1);
-            accidents.put(acc2.getId(), acc2);
-            accidents.put(acc3.getId(), acc3);
-
+        if (rules.size() == 0) {
             rules.add(Rule.of(1, "Статья. 1"));
             rules.add(Rule.of(2, "Статья. 2"));
             rules.add(Rule.of(3, "Статья. 3"));
-
-
         }
+
     }
 
     public ArrayList<Accident> findAllAccidents() {
@@ -50,18 +39,11 @@ public class AccidentMem {
     }
 
     public void add(Accident accident, String[] rIds) {
-        if (accident.getId() == 0) {
-            accidentService.generateId(accident);
-        }
-        accident.setType(findByIdType(accident.getType().getId()));
-        for (String r:rIds) {
-            Rule rule = rules.get(Integer.valueOf(r)-1);
+        for (String r : rIds) {
+            Rule rule = rules.get(Integer.valueOf(r) - 1);
             accident.addRule(rule);
         }
-
-        if (!accidents.containsValue(accident)) {
             accidents.put(accident.getId(), accident);
-        }
 
     }
 

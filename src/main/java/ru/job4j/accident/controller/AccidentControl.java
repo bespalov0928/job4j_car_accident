@@ -18,18 +18,18 @@ import java.util.List;
 
 @Controller
 public class AccidentControl {
-    private final AccidentMem accidents;
+    private final AccidentService accidentService;
 
-    public AccidentControl(AccidentMem accidents) {
-        this.accidents = accidents;
+    public AccidentControl(AccidentService accidentService) {
+        this.accidentService = accidentService;
     }
 
     @GetMapping("/create")
     public String create(Model model) {
-        List<AccidentType> types = accidents.findAllAccidentType();
+        List<AccidentType> types = accidentService.findAllAccidentType();
         model.addAttribute("types", types);
 
-        List<Rule> rules = accidents.findAllRule();
+        List<Rule> rules = accidentService.findAllRule();
         model.addAttribute("rules", rules);
 
         return "accident/create";
@@ -38,15 +38,15 @@ public class AccidentControl {
     @PostMapping("/save")
     public String save(@ModelAttribute Accident accident, HttpServletRequest req) {
         String[] ids = req.getParameterValues("rIds");
-        accidents.add(accident, ids);
+        accidentService.add(accident, ids);
         return "redirect:/";
     }
 
     @GetMapping("/edit")
     public String edit(@RequestParam("id") int id, Model model) {
-        List<AccidentType> types = accidents.findAllAccidentType();
-        List<Rule> rules = accidents.findAllRule();
-        Accident acc = accidents.findById(id);
+        List<AccidentType> types = accidentService.findAllAccidentType();
+        List<Rule> rules = accidentService.findAllRule();
+        Accident acc = accidentService.findById(id);
         model.addAttribute("types", types);
         model.addAttribute("accident", acc);
         model.addAttribute("rules", rules);
