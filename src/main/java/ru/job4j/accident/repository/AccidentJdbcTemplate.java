@@ -2,11 +2,14 @@ package ru.job4j.accident.repository;
 
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 import ru.job4j.accident.model.Accident;
 import ru.job4j.accident.model.AccidentType;
 import ru.job4j.accident.model.Rule;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -54,31 +57,33 @@ public class AccidentJdbcTemplate {
     }
 
     public Accident findById(int id) {
-        Accident rsl;
-        rsl = (Accident) jdbc.queryForObject("select accident.id as id, " +
-                        "accident.name as name, " +
-                        "accident.text as text, " +
-                        "accident.address as address, " +
-                        "accident.type as type, " +
-                        "accidentType.id as typeId, " +
-                        "accidentType.name as typeName " +
-                        "from accident " +
-                        "       left join accidentType " +
-                        "         on accident.type = accidentType.id where accident.id = 1",
-                (resultSet, rowNum) -> {
-                    AccidentType type = new AccidentType();
-                    type.setId(resultSet.getInt("typeId"));
-                    type.setName(resultSet.getString("typeName"));
+        String sql = "select accident.id as id, " +
+                "accident.name as name,  " +
+                "accident.text as text, " +
+                "accident.address as address, " +
+                "accident.type as type, " +
+                "accidentType.id as typeId, " +
+                "accidentType.name as typeName " +
+                "from accident left join accidentType on accident.type = accidentType.id where accident.id = ?";
+        Accident rsl = (Accident) jdbc.queryForObject(sql,
+                new Object[]{id}, new RowMapper<Accident>() {
+                    @Override
+                    public Accident mapRow(ResultSet rs, int rowNum)
+                            throws SQLException {
+                        AccidentType type = new AccidentType();
+                        type.setId(rs.getInt("typeId"));
+                        type.setName(rs.getString("typeName"));
 
-                    Accident newAccident = new Accident();
-                    newAccident.setId(resultSet.getInt("id"));
-                    newAccident.setName(resultSet.getString("name"));
-                    newAccident.setText(resultSet.getString("text"));
-                    newAccident.setAddress(resultSet.getString("address"));
-                    newAccident.setType(type);
-                    return newAccident;
-                }
-        );
+                        Accident pojo2 = new Accident();
+                        pojo2.setId(rs.getInt("id"));
+                        pojo2.setName(rs.getString("name"));
+                        pojo2.setText(rs.getString("text"));
+                        pojo2.setAddress(rs.getString("address"));
+                        pojo2.setType(type);
+                        return pojo2;
+                    }
+                });
+
         return rsl;
     }
 
@@ -98,10 +103,17 @@ public class AccidentJdbcTemplate {
 
     public AccidentType findByIdType(int id) {
         String sql = "select * from accidentType where id = ?";
-        return (AccidentType) jdbc.queryForObject(sql, new Object[]{id}, (rs, rowNum) ->
-                AccidentType.of(rs.getInt("id"), rs.getString("name"))
-        );
+        AccidentType rsl = (AccidentType) jdbc.queryForObject(sql,
+                new Object[]{id}, new RowMapper<AccidentType>() {
+                    @Override
+                    public AccidentType mapRow(ResultSet rs, int rowNum)
+                            throws SQLException {
+                        AccidentType pojo2 = AccidentType.of(rs.getInt("id"), rs.getString("name"));
+                        return pojo2;
+                    }
+                });
 
+        return rsl;
     }
 
     public List<Rule> findAllRule() {

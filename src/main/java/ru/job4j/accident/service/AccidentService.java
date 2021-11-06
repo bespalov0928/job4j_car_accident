@@ -17,27 +17,6 @@ public class AccidentService {
 
     public AccidentService(AccidentMem accidents) {
         this.accidents = accidents;
-        List<Accident> listAcc = accidents.findAllAccidents();
-        if (listAcc.size() == 0) {
-            AccidentType type1 = accidents.findByIdType(1);
-            AccidentType type2 = accidents.findByIdType(2);
-            AccidentType type3 = accidents.findByIdType(3);
-
-            Accident acc1 = Accident.of("acc1", "descr1", "addres1", type1);
-            Accident acc2 = Accident.of("acc2", "descr2", "addres2", type2);
-            Accident acc3 = Accident.of("acc3", "descr3", "addres3", type3);
-            acc1.setId(counter.incrementAndGet());
-            acc2.setId(counter.incrementAndGet());
-            acc3.setId(counter.incrementAndGet());
-
-            acc1.addRule(accidents.findByIdRule(Integer.valueOf(1)));
-            acc2.addRule(accidents.findByIdRule(Integer.valueOf(2)));
-            acc3.addRule(accidents.findByIdRule(Integer.valueOf(3)));
-
-            accidents.add(acc1);
-            accidents.add(acc2);
-            accidents.add(acc3);
-        }
     }
 
 
@@ -72,8 +51,16 @@ public class AccidentService {
         return rsl;
     }
 
+    public AccidentType findByIdType(int id) {
+        AccidentType acc = accidents.findByIdType(id);
+        return acc;
+    }
+
+
     public List<Rule> findAllRule() {
         return accidents.findAllRule();
     }
+
+
 
 }

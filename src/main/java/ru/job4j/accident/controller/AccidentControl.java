@@ -46,6 +46,7 @@ public class AccidentControl {
     public String edit(@RequestParam("id") int id, Model model) {
         List<AccidentType> types = accidentService.findAllAccidentType();
         List<Rule> rules = accidentService.findAllRule();
+        AccidentType type = accidentService.findByIdType(1);
         Accident acc = accidentService.findById(id);
         model.addAttribute("types", types);
         model.addAttribute("accident", acc);

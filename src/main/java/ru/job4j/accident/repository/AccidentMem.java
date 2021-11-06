@@ -28,6 +28,24 @@ public class AccidentMem {
             rules.put(2, Rule.of(2, "Статья. 2"));
             rules.put(3, Rule.of(3, "Статья. 3"));
         }
+
+        if (accidents.size() == 0) {
+            Accident acc1 = Accident.of("acc1", "descr1", "addres1", findByIdType(1));
+            Accident acc2 = Accident.of("acc2", "descr2", "addres2", findByIdType(2));
+            Accident acc3 = Accident.of("acc3", "descr3", "addres3", findByIdType(3));
+            acc1.setId(999);
+            acc2.setId(998);
+            acc3.setId(997);
+
+            acc1.addRule(findByIdRule(1));
+            acc2.addRule(findByIdRule(2));
+            acc3.addRule(findByIdRule(3));
+
+            accidents.put(999, acc1);
+            accidents.put(998, acc2);
+            accidents.put(997, acc3);
+        }
+
     }
 
     public ArrayList<Accident> findAllAccidents() {
