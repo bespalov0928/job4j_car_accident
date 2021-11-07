@@ -13,9 +13,9 @@ import java.util.concurrent.atomic.AtomicInteger;
 @Service
 public class AccidentService {
     private AtomicInteger counter = new AtomicInteger(0);
-    private final AccidentMem accidents;
+    private final AccidentJdbcTemplate accidents;
 
-    public AccidentService(AccidentMem accidents) {
+    public AccidentService(AccidentJdbcTemplate accidents) {
         this.accidents = accidents;
     }
 
