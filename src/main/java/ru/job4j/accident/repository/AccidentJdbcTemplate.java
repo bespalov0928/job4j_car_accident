@@ -18,6 +18,33 @@ import java.util.List;
 public class AccidentJdbcTemplate {
     private final JdbcTemplate jdbc;
 
+    private RowMapper rowMapperAccident = new RowMapper<Accident>() {
+        @Override
+        public Accident mapRow(ResultSet rs, int rowNum)
+                throws SQLException {
+            AccidentType type = new AccidentType();
+            type.setId(rs.getInt("typeId"));
+            type.setName(rs.getString("typeName"));
+
+            Accident pojo2 = new Accident();
+            pojo2.setId(rs.getInt("id"));
+            pojo2.setName(rs.getString("name"));
+            pojo2.setText(rs.getString("text"));
+            pojo2.setAddress(rs.getString("address"));
+            pojo2.setType(type);
+            return pojo2;
+        }
+    };
+
+    private RowMapper rowMapperType = new RowMapper<AccidentType>() {
+        @Override
+        public AccidentType mapRow(ResultSet rs, int rowNum)
+                throws SQLException {
+            AccidentType pojo2 = AccidentType.of(rs.getInt("id"), rs.getString("name"));
+            return pojo2;
+        }
+    };
+
     public AccidentJdbcTemplate(JdbcTemplate jdbc) {
         this.jdbc = jdbc;
     }
@@ -57,6 +84,8 @@ public class AccidentJdbcTemplate {
     }
 
     public Accident findById(int id) {
+
+
         String sql = "select accident.id as id, " +
                 "accident.name as name,  " +
                 "accident.text as text, " +
@@ -66,23 +95,7 @@ public class AccidentJdbcTemplate {
                 "accidentType.name as typeName " +
                 "from accident left join accidentType on accident.type = accidentType.id where accident.id = ?";
         Accident rsl = (Accident) jdbc.queryForObject(sql,
-                new Object[]{id}, new RowMapper<Accident>() {
-                    @Override
-                    public Accident mapRow(ResultSet rs, int rowNum)
-                            throws SQLException {
-                        AccidentType type = new AccidentType();
-                        type.setId(rs.getInt("typeId"));
-                        type.setName(rs.getString("typeName"));
-
-                        Accident pojo2 = new Accident();
-                        pojo2.setId(rs.getInt("id"));
-                        pojo2.setName(rs.getString("name"));
-                        pojo2.setText(rs.getString("text"));
-                        pojo2.setAddress(rs.getString("address"));
-                        pojo2.setType(type);
-                        return pojo2;
-                    }
-                });
+                new Object[]{id}, rowMapperAccident);
 
         return rsl;
     }
@@ -104,14 +117,7 @@ public class AccidentJdbcTemplate {
     public AccidentType findByIdType(int id) {
         String sql = "select * from accidentType where id = ?";
         AccidentType rsl = (AccidentType) jdbc.queryForObject(sql,
-                new Object[]{id}, new RowMapper<AccidentType>() {
-                    @Override
-                    public AccidentType mapRow(ResultSet rs, int rowNum)
-                            throws SQLException {
-                        AccidentType pojo2 = AccidentType.of(rs.getInt("id"), rs.getString("name"));
-                        return pojo2;
-                    }
-                });
+                new Object[]{id}, rowMapperType);
 
         return rsl;
     }
