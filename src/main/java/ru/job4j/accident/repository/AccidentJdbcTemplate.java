@@ -18,31 +18,24 @@ import java.util.List;
 public class AccidentJdbcTemplate {
     private final JdbcTemplate jdbc;
 
-    private RowMapper rowMapperAccident = new RowMapper<Accident>() {
-        @Override
-        public Accident mapRow(ResultSet rs, int rowNum)
-                throws SQLException {
-            AccidentType type = new AccidentType();
-            type.setId(rs.getInt("typeId"));
-            type.setName(rs.getString("typeName"));
+    private RowMapper rowMapperAccident = (ResultSet rs, int rowNum) -> {
+        AccidentType type = new AccidentType();
+        type.setId(rs.getInt("typeId"));
+        type.setName(rs.getString("typeName"));
 
-            Accident pojo2 = new Accident();
-            pojo2.setId(rs.getInt("id"));
-            pojo2.setName(rs.getString("name"));
-            pojo2.setText(rs.getString("text"));
-            pojo2.setAddress(rs.getString("address"));
-            pojo2.setType(type);
-            return pojo2;
-        }
+        Accident pojo2 = new Accident();
+        pojo2.setId(rs.getInt("id"));
+        pojo2.setName(rs.getString("name"));
+        pojo2.setText(rs.getString("text"));
+        pojo2.setAddress(rs.getString("address"));
+        pojo2.setType(type);
+        return pojo2;
     };
 
-    private RowMapper rowMapperType = new RowMapper<AccidentType>() {
-        @Override
-        public AccidentType mapRow(ResultSet rs, int rowNum)
-                throws SQLException {
-            AccidentType pojo2 = AccidentType.of(rs.getInt("id"), rs.getString("name"));
-            return pojo2;
-        }
+
+    private RowMapper rowMapperType = (ResultSet rs, int rowNum) -> {
+        AccidentType pojo2 = AccidentType.of(rs.getInt("id"), rs.getString("name"));
+        return pojo2;
     };
 
     public AccidentJdbcTemplate(JdbcTemplate jdbc) {
