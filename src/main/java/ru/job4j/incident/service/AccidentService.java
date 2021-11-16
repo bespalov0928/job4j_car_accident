@@ -1,21 +1,22 @@
-package ru.job4j.accident.service;
+package ru.job4j.incident.service;
 
 import org.springframework.stereotype.Service;
-import ru.job4j.accident.model.Accident;
-import ru.job4j.accident.model.AccidentType;
-import ru.job4j.accident.model.Rule;
-import ru.job4j.accident.repository.AccidentJdbcTemplate;
-import ru.job4j.accident.repository.AccidentMem;
+import ru.job4j.incident.model.Accident;
+import ru.job4j.incident.model.AccidentType;
+import ru.job4j.incident.model.Rule;
+import ru.job4j.incident.repository.AccidentHibernate;
+import ru.job4j.incident.repository.AccidentJdbcTemplate;
+import ru.job4j.incident.repository.AccidentMem;
 
 import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
 
 @Service
-public class AccidentService {
+public class AccidentService implements AccService {
     private AtomicInteger counter = new AtomicInteger(0);
-    private final AccidentJdbcTemplate accidents;
+    private final AccidentHibernate accidents;
 
-    public AccidentService(AccidentJdbcTemplate accidents) {
+    public AccidentService(AccidentHibernate accidents) {
         this.accidents = accidents;
     }
 
@@ -46,8 +47,8 @@ public class AccidentService {
         return acc;
     }
 
-    public ArrayList<AccidentType> findAllAccidentType() {
-        ArrayList<AccidentType> rsl = accidents.findAllAccidentType();
+    public List<AccidentType> findAllAccidentType() {
+        List<AccidentType> rsl = accidents.findAllAccidentType();
         return rsl;
     }
 

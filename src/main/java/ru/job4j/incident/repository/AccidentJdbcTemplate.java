@@ -1,12 +1,12 @@
-package ru.job4j.accident.repository;
+package ru.job4j.incident.repository;
 
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
-import ru.job4j.accident.model.Accident;
-import ru.job4j.accident.model.AccidentType;
-import ru.job4j.accident.model.Rule;
+import ru.job4j.incident.model.Accident;
+import ru.job4j.incident.model.AccidentType;
+import ru.job4j.incident.model.Rule;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -92,7 +92,6 @@ public class AccidentJdbcTemplate {
 
         return rsl;
     }
-
 
     public ArrayList<AccidentType> findAllAccidentType() {
         List<AccidentType> types = jdbc.query(

@@ -1,14 +1,24 @@
-package ru.job4j.accident.model;
+package ru.job4j.incident.model;
 
+import javax.persistence.*;
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
+@Entity
+@Table(name = "accidents")
 public class Accident {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String name;
     private String text;
     private String address;
+
+    @OneToOne
     private AccidentType type;
+
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Rule> rules;
 
     public Accident() {
@@ -74,4 +84,19 @@ public class Accident {
         }
         this.rules.add(rule);
     }
+
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+        Accident accident = (Accident) obj;
+        return id == accident.id;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
+    }
+
 }

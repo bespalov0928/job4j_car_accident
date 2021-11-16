@@ -1,4 +1,4 @@
-package ru.job4j.accident;
+package ru.job4j.incident;
 
 import java.util.ArrayList;
 import java.util.List;

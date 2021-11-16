@@ -1,18 +1,22 @@
-package ru.job4j.accident;
+package ru.job4j.incident.di;
 
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import ru.job4j.incident.ConsoleInput;
+import ru.job4j.incident.StartUI;
+import ru.job4j.incident.Store;
 
-public class Main {
+public class SpringDI {
     public static void main(String[] args) {
         AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext();
-        context.scan("ru.job4j.accident");
+        context.register(Store.class);
+        context.register(ConsoleInput.class);
+        context.register(StartUI.class);
         context.refresh();
         StartUI ui = context.getBean(StartUI.class);
         ui.add("Petr Arsentev");
         ui.add("Ivan ivanov");
         ui.print();
 
-        StartUI another = context.getBean(StartUI.class);
-        another.print();
     }
+
 }
