@@ -22,7 +22,7 @@ public class Accident {
     private Set<Rule> rules;
 
     public static Accident of(String name, String text, String address, AccidentType type) {
-        Accident acc  = new Accident();
+        Accident acc = new Accident();
         acc.name = name;
         acc.text = text;
         acc.address = address;
@@ -85,8 +85,12 @@ public class Accident {
 
     @Override
     public boolean equals(Object obj) {
-        if (this == obj) return true;
-        if (obj == null || getClass() != obj.getClass()) return false;
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null || getClass() != obj.getClass()) {
+            return false;
+        }
         Accident accident = (Accident) obj;
         return id == accident.id;
     }
