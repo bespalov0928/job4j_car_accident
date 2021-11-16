@@ -17,7 +17,6 @@ public class WebInit implements WebApplicationInitializer  {
     @Override
     public void onStartup(ServletContext servletCxt) throws ServletException {
         AnnotationConfigWebApplicationContext ac = new AnnotationConfigWebApplicationContext();
-//        ac.register(WebConfig.class);
         ac.register(WebConfig.class, HbmConfig.class);
         ac.refresh();
 

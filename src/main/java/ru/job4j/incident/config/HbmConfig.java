@@ -36,7 +36,6 @@ public class HbmConfig {
         LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();
         sessionFactory.setDataSource(ds);
         sessionFactory.setPackagesToScan("ru.job4j.incident.model");
-//        sessionFactory.setPackagesToScan("ru.job4j.incident.service");
         Properties cfg = new Properties();
         cfg.setProperty("hibernate.dialect", dialect);
         sessionFactory.setHibernateProperties(cfg);
