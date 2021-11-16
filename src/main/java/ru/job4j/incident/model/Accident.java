@@ -21,9 +21,6 @@ public class Accident {
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Rule> rules;
 
-    public Accident() {
-    }
-
     public static Accident of(String name, String text, String address, AccidentType type) {
         Accident acc  = new Accident();
         acc.name = name;
