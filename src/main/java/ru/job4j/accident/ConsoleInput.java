@@ -1,4 +1,4 @@
-package ru.job4j.incident;
+package ru.job4j.accident;
 
 import org.springframework.stereotype.Component;
 

@@ -17,8 +17,8 @@
         <property name="format_sql">true</property>
         <property name="use_sql_comments">true</property>
 
-        <mapping class="ru.job4j.incident.model.Accident" />
-        <mapping class="ru.job4j.incident.model.AccidentType" />
-        <mapping class="ru.job4j.incident.model.Rule" />
+        <mapping class="ru.job4j.accident.model.Accident" />
+        <mapping class="ru.job4j.accident.model.AccidentType" />
+        <mapping class="ru.job4j.accident.model.Rule" />
     </session-factory>
 </hibernate-configuration>

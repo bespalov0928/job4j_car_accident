@@ -1,4 +1,4 @@
-package ru.job4j.incident.model;
+package ru.job4j.accident.model;
 
 import javax.persistence.*;
 import java.util.HashSet;
@@ -15,10 +15,14 @@ public class Accident {
     private String text;
     private String address;
 
-    @OneToOne
+    @ManyToOne
     private AccidentType type;
 
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "accidents_rules",
+            joinColumns = @JoinColumn(name = "accident_id"),
+            inverseJoinColumns = @JoinColumn(name = "rule_id")
+    )
     private Set<Rule> rules;
 
     public static Accident of(String name, String text, String address, AccidentType type) {

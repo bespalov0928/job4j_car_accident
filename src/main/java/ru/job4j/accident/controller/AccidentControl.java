@@ -1,4 +1,4 @@
-package ru.job4j.incident.controller;
+package ru.job4j.accident.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -6,13 +6,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import ru.job4j.incident.model.Accident;
-import ru.job4j.incident.model.AccidentType;
-import ru.job4j.incident.model.Rule;
-import ru.job4j.incident.repository.AccidentJdbcTemplate;
-import ru.job4j.incident.repository.AccidentMem;
-import ru.job4j.incident.service.AccService;
-import ru.job4j.incident.service.AccidentService;
+import ru.job4j.accident.model.Accident;
+import ru.job4j.accident.model.AccidentType;
+import ru.job4j.accident.model.Rule;
+import ru.job4j.accident.repository.AccidentJdbcTemplate;
+import ru.job4j.accident.repository.AccidentMem;
+import ru.job4j.accident.service.AccService;
+import ru.job4j.accident.service.AccidentService;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
@@ -33,7 +33,7 @@ public class AccidentControl {
         List<Rule> rules = accidentService.findAllRule();
         model.addAttribute("rules", rules);
 
-        return "incident/create";
+        return "accident/create";
     }
 
     @PostMapping("/save")
@@ -52,7 +52,7 @@ public class AccidentControl {
         model.addAttribute("types", types);
         model.addAttribute("accident", acc);
         model.addAttribute("rules", rules);
-        return "incident/edit";
+        return "accident/edit";
     }
 
 }

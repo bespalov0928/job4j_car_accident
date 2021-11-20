@@ -1,4 +1,4 @@
-package ru.job4j.incident;
+package ru.job4j.accident;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -17,13 +17,13 @@ public class Main {
         try {
             SessionFactory sf = new MetadataSources(registry).buildMetadata().buildSessionFactory();
             Session session = sf.openSession();
-            rsl = session.createQuery("from ru.job4j.incident.model.Accident").list();
+            rsl = session.createQuery("from ru.job4j.accident.model.Accident").list();
         } catch (Exception e) {
             e.printStackTrace();
         }
 
         AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext();
-        context.scan("ru.job4j.incident");
+        context.scan("ru.job4j.accident");
         context.refresh();
         StartUI ui = context.getBean(StartUI.class);
         ui.add("Petr Arsentev");

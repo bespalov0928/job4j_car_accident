@@ -19,6 +19,11 @@ create table accidents (
   rules   integer references Rule (id)
 )
 
+create table accident_rules (
+    accident_id int references accidents,
+    rule_id int references rules
+)
+
 insert into accidentTypes values (1, 'Две машины');
 insert into accidentTypes values (2, 'Машина и человек');
 insert into accidentTypes values (3, 'Машина и велосипед');

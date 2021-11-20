@@ -1,6 +1,7 @@
-package ru.job4j.incident.model;
+package ru.job4j.accident.model;
 
 import javax.persistence.*;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -10,6 +11,9 @@ public class Rule {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     public String name;
+
+    @ManyToMany(mappedBy = "rule")
+    private List<Accident> accidents;
 
     public static Rule of(int id, String name){
         Rule rule = new Rule();
