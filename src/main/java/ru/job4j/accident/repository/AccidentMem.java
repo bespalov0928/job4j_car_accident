@@ -8,7 +8,7 @@ import ru.job4j.accident.service.AccidentService;
 
 import java.util.*;
 
-@Repository
+//@Repository
 public class AccidentMem {
 
     private Map<Integer, Accident> accidents = new HashMap<>();

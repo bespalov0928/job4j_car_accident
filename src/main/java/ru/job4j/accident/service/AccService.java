@@ -9,7 +9,7 @@ import java.util.ArrayList;
 
 import java.util.List;
 
-@Service
+//@Service
 public interface AccService {
 
     public ArrayList<Accident> findAllAccidents();
