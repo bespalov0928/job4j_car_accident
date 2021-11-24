@@ -9,11 +9,13 @@ import ru.job4j.accident.model.AccidentType;
 import ru.job4j.accident.model.Rule;
 
 import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.Function;
 
 
 @Repository
 public class AccidentHibernate {
+    private AtomicInteger counter = new AtomicInteger(0);
     private final SessionFactory sf;
 
     public AccidentHibernate(SessionFactory sf) {
@@ -43,6 +45,10 @@ public class AccidentHibernate {
     }
 
     public Accident add(Accident accident) {
+        if (accident.getId() == 0) {
+            accident.setId(counter.incrementAndGet());
+        }
+
         return this.tx(session -> {
             session.save(accident);
             return accident;

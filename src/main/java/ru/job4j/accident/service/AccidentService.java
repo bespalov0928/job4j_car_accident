@@ -13,7 +13,6 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 @Service
 public class AccidentService implements AccService {
-    private AtomicInteger counter = new AtomicInteger(0);
     private final AccidentHibernate accidents;
 
     public AccidentService(AccidentHibernate accidents) {
@@ -28,9 +27,6 @@ public class AccidentService implements AccService {
     }
 
     public void add(Accident accident, String[] rIds) {
-        if (accident.getId() == 0) {
-            accident.setId(counter.incrementAndGet());
-        }
         AccidentType type = accidents.findByIdType(accident.getType().getId());
         accident.setType(type);
 

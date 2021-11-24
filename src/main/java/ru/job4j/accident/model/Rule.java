@@ -12,9 +12,6 @@ public class Rule {
     private int id;
     public String name;
 
-    @ManyToMany(mappedBy = "rule")
-    private List<Accident> accidents;
-
     public static Rule of(int id, String name){
         Rule rule = new Rule();
         rule.id = id;

@@ -18,12 +18,8 @@ public class Accident {
     @ManyToOne
     private AccidentType type;
 
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name = "accidents_rules",
-            joinColumns = @JoinColumn(name = "accident_id"),
-            inverseJoinColumns = @JoinColumn(name = "rule_id")
-    )
-    private Set<Rule> rules;
+    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    private Set<Rule> rules = new HashSet<Rule>();
 
     public static Accident of(String name, String text, String address, AccidentType type) {
         Accident acc = new Accident();
@@ -80,9 +76,6 @@ public class Accident {
     }
 
     public void addRule(Rule rule) {
-        if (this.rules == null) {
-            this.rules = new HashSet<Rule>();
-        }
         this.rules.add(rule);
     }
 
