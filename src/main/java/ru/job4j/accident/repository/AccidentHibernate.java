@@ -13,7 +13,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.Function;
 
 
-@Repository
+//@Repository
 public class AccidentHibernate {
     private AtomicInteger counter = new AtomicInteger(0);
     private final SessionFactory sf;

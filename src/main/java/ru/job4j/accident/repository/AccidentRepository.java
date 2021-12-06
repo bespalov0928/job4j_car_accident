@@ -6,30 +6,41 @@ import ru.job4j.accident.model.Accident;
 import ru.job4j.accident.model.AccidentType;
 import ru.job4j.accident.model.Rule;
 
+import javax.persistence.EntityGraph;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public interface AccidentRepository extends CrudRepository<Accident, Integer> {
 
-    @Query("select accident.id as id, accident.name as name, accident.text as text, accident.address as address, accident.type as type ,accidentType.id as typeId, accidentType.name as typeName from accident left join accidentType on accident.type = accidentType.id")
+    private EntityManagerFactory emf = null;
+
+    public AccidentRepository(){
+        Map properties = new HashMap();
+        properties.put("hibernate.show_sql", "true");
+        properties.put("hibernate.format_sql", "true");
+        emf = Persistence.createEntityManagerFactory("entity-graph-pu", properties);
+
+    }
+
+    public List<Accident> findAllAccident(){
+        EntityManager entityManager = emf.createEntityManager();
+        EntityGraph entityGraph = entityManager.getEntityGraph("accident-entity-graph");
+        List<Accident> rsl = entityManager.createQuery("Select a from Accident a", Accident)
+                .setHint("javax.persistence.fetchgraph", entityGraph)
+                .getResultList();
+        return rsl;
+
+    }
     public List<Accident> findAll();
 
     public Accident findById(int id);
 
     public Accident save(Accident accident);
 
-
-    @Query("select id, name from accidentType")
-    public List<AccidentType> findAllAccidentType();
-
-    @Query("select id, name from accidentType where id = ?1")
-    public Accident findByIdType(int id);
-
-
-    @Query("select id, name from rule")
-    public List<Rule> findAllRule();
-
-    @Query("select id, name from rule where id = ?1")
-    public Rule findByIdRule(int id);
 
 
 }

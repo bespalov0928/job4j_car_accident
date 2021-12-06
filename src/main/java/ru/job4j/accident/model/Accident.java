@@ -5,6 +5,18 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
+@NamedEntityGraph(
+        name = "accident-entity-graph",
+        attributeNodes = {
+                @NamedAttributeNode("id"),
+                @NamedAttributeNode("name"),
+                @NamedAttributeNode("text"),
+                @NamedAttributeNode("address"),
+                @NamedAttributeNode("type"),
+                @NamedAttributeNode("rules")
+        }
+)
+
 @Entity
 @Table(name = "accidents")
 public class Accident {
