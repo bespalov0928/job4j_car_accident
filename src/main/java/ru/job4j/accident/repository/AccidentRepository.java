@@ -16,18 +16,18 @@ import java.util.Map;
 
 public interface AccidentRepository extends CrudRepository<Accident, Integer> {
 
-    private EntityManagerFactory Emf = null;
+    private EntityManagerFactory EMF = null;
 
     public AccidentRepository(){
         Map properties = new HashMap();
         properties.put("hibernate.show_sql", "true");
         properties.put("hibernate.format_sql", "true");
-        Emf = Persistence.createEntityManagerFactory("entity-graph-pu", properties);
+        EMF = Persistence.createEntityManagerFactory("entity-graph-pu", properties);
 
     }
 
     public List<Accident> findAllAccident(){
-        EntityManager entityManager = Emf.createEntityManager();
+        EntityManager entityManager = EMF.createEntityManager();
         EntityGraph entityGraph = entityManager.getEntityGraph("accident-entity-graph");
         List<Accident> rsl = entityManager.createQuery("Select a from Accident a", Accident)
                 .setHint("javax.persistence.fetchgraph", entityGraph)
