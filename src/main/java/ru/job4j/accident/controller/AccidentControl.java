@@ -11,6 +11,7 @@ import ru.job4j.accident.model.AccidentType;
 import ru.job4j.accident.model.Rule;
 import ru.job4j.accident.repository.AccidentJdbcTemplate;
 import ru.job4j.accident.repository.AccidentMem;
+import ru.job4j.accident.repository.AccidentRepository;
 import ru.job4j.accident.service.AccService;
 import ru.job4j.accident.service.AccidentService;
 
@@ -19,9 +20,9 @@ import java.util.List;
 
 @Controller
 public class AccidentControl {
-    private final AccService accidentService;
+    private final AccidentRepository accidentService;
 
-    public AccidentControl(AccService accidentService) {
+    public AccidentControl(AccidentRepository  accidentService) {
         this.accidentService = accidentService;
     }
 
@@ -39,7 +40,7 @@ public class AccidentControl {
     @PostMapping("/save")
     public String save(@ModelAttribute Accident accident, HttpServletRequest req) {
         String[] ids = req.getParameterValues("rIds");
-        accidentService.add(accident, ids);
+        accidentService.save(accident);
         return "redirect:/";
     }
 
@@ -47,7 +48,6 @@ public class AccidentControl {
     public String edit(@RequestParam("id") int id, Model model) {
         List<AccidentType> types = accidentService.findAllAccidentType();
         List<Rule> rules = accidentService.findAllRule();
-        AccidentType type = accidentService.findByIdType(1);
         Accident acc = accidentService.findById(id);
         model.addAttribute("types", types);
         model.addAttribute("accident", acc);
