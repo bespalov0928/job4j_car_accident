@@ -11,13 +11,14 @@ import ru.job4j.accident.repository.AccidentMem;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
 
-@Service
 public class AccidentService implements AccService {
     private final AccidentHibernate accidents;
 
     public AccidentService(AccidentHibernate accidents) {
         this.accidents = accidents;
     }
+
+
 
 
     public ArrayList<Accident> findAllAccidents() {

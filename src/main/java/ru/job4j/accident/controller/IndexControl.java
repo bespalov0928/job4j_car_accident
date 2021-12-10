@@ -7,6 +7,7 @@ import ru.job4j.accident.model.Accident;
 import ru.job4j.accident.repository.AccidentRepository;
 import ru.job4j.accident.service.AccService;
 import ru.job4j.accident.service.AccidentService;
+import ru.job4j.accident.service.AccidentServiceSpringData;
 
 import java.util.List;
 
@@ -14,16 +15,16 @@ import java.util.List;
 @Controller
 public class IndexControl {
 
-    private final AccidentRepository accidentService;
+    private final AccidentServiceSpringData accidentService;
 
-    public IndexControl(AccidentRepository accidentService) {
+    public IndexControl(AccidentServiceSpringData accidentService) {
         this.accidentService = accidentService;
     }
 
     @GetMapping("/")
     public String index(Model model) {
         List<Accident> accidentList = null;
-        accidentList = accidentService.findAll();
+        accidentList = accidentService.findAllAccidents();
         model.addAttribute("accidents", accidentList);
         return "index";
     }
