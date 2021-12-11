@@ -1,10 +1,10 @@
-package ru.job4j.accident;
+package ru.job4j.accident.leson;
 
 import org.springframework.stereotype.Component;
 
 import java.util.Scanner;
 
-@Component
+//@Component
 public class ConsoleInput {
     private Scanner scanner = new Scanner(System.in);
 
@@ -16,6 +16,4 @@ public class ConsoleInput {
     public int askInt(String question) {
         return Integer.valueOf(askStr(question));
     }
-
-
 }

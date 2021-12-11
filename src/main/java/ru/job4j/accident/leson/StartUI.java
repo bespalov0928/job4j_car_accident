@@ -1,11 +1,11 @@
-package ru.job4j.accident;
+package ru.job4j.accident.leson;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
-@Component
-@Scope("prototype")
+//@Component
+//@Scope("prototype")
 public class StartUI {
     @Autowired
     private Store store;
