@@ -12,7 +12,7 @@ import javax.sql.DataSource;
 
 @Configuration
 @PropertySource("classpath:app.properties")
-//@EnableTransactionManagement
+@EnableTransactionManagement
 public class JdbcConfig {
     @Bean
     public DataSource ds(@Value("${jdbc.driver}") String driver,

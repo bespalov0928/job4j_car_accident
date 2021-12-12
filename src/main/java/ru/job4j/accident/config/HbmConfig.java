@@ -16,7 +16,7 @@ import java.util.Properties;
 
 @Configuration
 @PropertySource("classpath:app.properties")
-//@EnableTransactionManagement
+@EnableTransactionManagement
 public class HbmConfig {
     @Bean
     public DataSource ds(@Value("${jdbc.driver}") String driver,
@@ -42,10 +42,10 @@ public class HbmConfig {
         return sessionFactory;
     }
 
-//    @Bean
-//    public PlatformTransactionManager htx(SessionFactory sf) {
-//        HibernateTransactionManager tx = new HibernateTransactionManager();
-//        tx.setSessionFactory(sf);
-//        return tx;
-//    }
+    @Bean
+    public PlatformTransactionManager htx(SessionFactory sf) {
+        HibernateTransactionManager tx = new HibernateTransactionManager();
+        tx.setSessionFactory(sf);
+        return tx;
+    }
 }
