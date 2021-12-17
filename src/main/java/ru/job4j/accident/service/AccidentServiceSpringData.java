@@ -8,7 +8,9 @@ import ru.job4j.accident.model.Rule;
 import ru.job4j.accident.repository.AccidentRepository;
 import ru.job4j.accident.repository.AccidentTypeRepository;
 import ru.job4j.accident.repository.RuleRepository;
+
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class AccidentServiceSpringData {
@@ -28,7 +30,12 @@ public class AccidentServiceSpringData {
         return rsl;
     }
 
-    public void add(Accident accident) {
+    public void add(Accident accident, String[] idArray) {
+        for (int index = 0; index < idArray.length; index++) {
+            Integer idRule = Integer.valueOf(idArray[index]);
+
+
+        }
         accRepository.save(accident);
     }
 
