@@ -33,8 +33,9 @@ public class AccidentServiceSpringData {
     public void add(Accident accident, String[] idArray) {
         for (int index = 0; index < idArray.length; index++) {
             Integer idRule = Integer.valueOf(idArray[index]);
-
-
+            Optional<Rule> rule = ruleRepository.findById(idRule);
+            Rule rsl = rule.get();
+            accident.addRule(rsl);
         }
         accRepository.save(accident);
     }
@@ -53,6 +54,14 @@ public class AccidentServiceSpringData {
         List<Rule> rsl = (List<Rule>) ruleRepository.findAll();
         return rsl;
     }
+
+    public Rule findByIdRule(Integer id) {
+
+        Optional<Rule> rule = ruleRepository.findById(id);
+        return rule.get();
+
+    }
+
 
 
 }
