@@ -30,19 +30,21 @@ public class AccidentServiceSpringData {
         return rsl;
     }
 
+    @Transactional
     public void add(Accident accident, String[] idArray) {
-        for (int index = 0; index < idArray.length; index++) {
-            Integer idRule = Integer.valueOf(idArray[index]);
-            Optional<Rule> rule = ruleRepository.findById(idRule);
+        for (String index : idArray) {
+            System.out.println(index);
+            Optional<Rule> rule = ruleRepository.findById(Integer.valueOf(index));
             Rule rsl = rule.get();
             accident.addRule(rsl);
         }
         accRepository.save(accident);
     }
 
-    public Accident findById(int id) {
-        Accident acc = accRepository.findById(id);
-        return acc;
+    public Accident findById(Integer id) {
+        Optional<Accident> acc = accRepository.findById(Integer.valueOf(id));
+        Accident rsl = acc.get();
+        return rsl;
     }
 
     public List<AccidentType> findAllAccidentType() {
@@ -61,7 +63,6 @@ public class AccidentServiceSpringData {
         return rule.get();
 
     }
-
 
 
 }
