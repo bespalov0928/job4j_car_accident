@@ -22,6 +22,10 @@
 </head>
 <body>
 
+<div>
+    Login as ${user.username}
+</div>
+
 <div class="card-body">
     <a href="<c:url value='/create'/>">Добавить инцидент</a>
     <br>
@@ -40,6 +44,7 @@
         </tr>
         </thead>
         <tbody>
+
         <c:forEach items="${accidents}" var="acc">
             <tr>
                 <td>
