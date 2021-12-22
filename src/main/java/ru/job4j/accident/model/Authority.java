@@ -12,6 +12,8 @@ public class Authority {
 
     private String authority;
 
+    public Authority() {}
+
     public int getId() {
         return id;
     }

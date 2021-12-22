@@ -20,6 +20,8 @@ public class User {
 
     private boolean enabled;
 
+    public User() {}
+
     public int getId() {
         return id;
     }
