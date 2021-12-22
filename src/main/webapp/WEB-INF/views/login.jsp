@@ -7,6 +7,7 @@
             ${errorMessage}
     </div>
 </c:if>
+<a href="<c:url value='/reg'/>">Регистрация</a>
 <form name='login' action="<c:url value='/login'/>" method='POST'>
     <table>
         <tr>
@@ -18,10 +19,10 @@
             <td><input type='password' name='password'/></td>
         </tr>
         <tr>
-            <td colspan='2'><input name="submit" type="submit" value="submit" /></td>
+            <td colspan='2'><input name="submit" type="submit" value="submit"/></td>
         </tr>
     </table>
-    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 </form>
 </body>
 </html>
