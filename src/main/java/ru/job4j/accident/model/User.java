@@ -20,6 +20,13 @@ public class User {
 
     private boolean enabled;
 
+    public User(String password, String username, Authority authority, boolean enabled) {
+        this.password = password;
+        this.username = username;
+        this.authority = authority;
+        this.enabled = enabled;
+    }
+
     public User() {}
 
     public int getId() {

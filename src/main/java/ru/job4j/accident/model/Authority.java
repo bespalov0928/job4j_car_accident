@@ -12,6 +12,10 @@ public class Authority {
 
     private String authority;
 
+    public Authority(String authority) {
+        this.authority = authority;
+    }
+
     public Authority() {}
 
     public int getId() {
