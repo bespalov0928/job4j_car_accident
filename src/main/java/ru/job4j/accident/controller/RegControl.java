@@ -25,6 +25,11 @@ public class RegControl {
 
     @PostMapping("/reg")
     public String regSave(@ModelAttribute User user) {
+        User userName = users.findByUsername(user.getUsername());
+        System.out.println(userName);
+        if (userName != null){
+            return "redirect:/login";
+        }
         user.setEnabled(true);
         user.setPassword(encoder.encode(user.getPassword()));
         user.setAuthority(authorities.findByAuthority("ROLE_USER"));

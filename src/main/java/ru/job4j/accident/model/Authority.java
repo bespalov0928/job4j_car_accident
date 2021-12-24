@@ -16,7 +16,8 @@ public class Authority {
         this.authority = authority;
     }
 
-    public Authority() {}
+    public Authority() {
+    }
 
     public int getId() {
         return id;
@@ -36,8 +37,12 @@ public class Authority {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         Authority authority = (Authority) o;
         return id == authority.id;
     }
